@@ -2,30 +2,163 @@
 
 ## funny
 
-1. 下载，不破坏原始架构
-2. 写了my_configs.vim  并下载了自己插件到my_plugins文件夹
-3. 写了update_my_plugins.vim 更新自己的插件 ,使用`python3 update_my_plugins.vim`
-4. rainbow_paratheses的好处是让括号好看些
-5. 更快的ctrlp配置`F2`,`F1`和`,o`的bufferexplorer命令一样
-6. 原有的配置居然支持保存更新，很厉害
-7. 增加了nerdcomment方便注释`(,cc)`, 替换掉vim-commentary
-8. Comfortable-motion也是挺有用的`<C-f><C-d><C-u><C-b>`
-9. 增加我的`,a 搜索光标下单词 和<space>/打开Ag`,`,cad`调用calendar,然后写wiki,`,wi`写日记也是可以的,`[[#]]`在#之后可以使用`Ctrl-X Ctrl-o`会弹出一个列表
+## Theory
+```
+#!/bin/bash
+
+cd $(dirname $BASH_SOURCE)
+BASE=$(pwd)
+
+export GIT_SSL_NO_VERIFY=true
+mkdir -p ~/.vim/autoload
+curl --insecure -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim
+
+```
+
+`vim +PlugInstall +qall`
+## Application
+
+1. rainbow_paratheses的好处是让括号好看些
+2. 更快的ctrlp配置`F2`,`F1`和`,o`的bufferexplorer命令一样
+3. 增加了nerdcomment方便注释`(,cc)`, 替换掉vim-commentary
+4. Comfortable-motion也是挺有用的`<C-f><C-d><C-u><C-b>`
+5. 增加我的`,a 搜索光标下单词 和<space>/打开Ag`,`,cad`调用calendar,然后写wiki,`,wi`写日记也是可以的,`[[#]]`在#之后可以使用`Ctrl-X Ctrl-o`会弹出一个列表
     不忍放弃vim的一个原因，很方便; 摁下`+`表示增加header，`-`表示较少header
-10. `C:\Users\yzl`的.NERDTreeBookmarks nerdtree的`:Bookmark`对应的文件夹名名字,`_vim_mru_files`保存着最近访问的文件,`_vimtags`保存着所有tag相关的记录.
-11. `C-s`变成加入光标, `Alt-S`变成添加符合全部单词下的光标,`ESC`推出MC(multiple cursors)模式
+6. `C:\Users\yzl`的.NERDTreeBookmarks nerdtree的`:Bookmark`对应的文件夹名名字,`_vim_mru_files`保存着最近访问的文件,`_vimtags`保存着所有tag相关的记录.
+7. `C-s`变成加入光标, `Alt-S`变成添加符合全部单词下的光标,`ESC`推出MC(multiple cursors)模式
 [[#pringout]]
-12. `gf` open file under cursor,如果是路径的话(配合上vimwiki).
-13. easymotion的<leader>j和k可以正常于运行
-14. 添加了TODO,FIXME等关键字的高亮，`F7` 添加TODO(yzl),`,g`调用`:ACK` 然后写上TODO就可以过滤项目中所有具有TODO字段的行了(习惯性地添加TODO,FIXME,BUG等) [TODO高亮](https://www.jb51.net/article/115922.htm)
-15. `,fu`查看当前代码文件的所有函数  `,fU`跳转到指定函数中
-16.  `F8`添加so what 总结性声明.
-17. 编写perl文件常用命令，读取文件`\ii`,输出文件`\io`,while循环`\sw`,for循环`\sfe`, 另外你不能忘记的三个数据结构,标量`\id`,数组`\ia`,字典`\ih`
-18. Interesting,不妨试试! `,z`打开goyo界面，很好看
-19. 先设置一个mark`mA`,然后由于大写字母支持文件间跳转，于是`~A`也是可以跳转到先前的位置 很方便
-20. 修改了vimwiki配置到vim_runtime.
-21. 搞清楚[ vim-snipmate ][3]和[ vim-snippets ][2]的关系
+8. `gf` open file under cursor,如果是路径的话(配合上vimwiki).
+9. easymotion的<leader>j和k可以正常于运行
+10. 添加了TODO,FIXME等关键字的高亮，`F7` 添加TODO(yzl),`,g`调用`:ACK` 然后写上TODO就可以过滤项目中所有具有TODO字段的行了(习惯性地添加TODO,FIXME,BUG等) [TODO高亮](https://www.jb51.net/article/115922.htm)
+11. `,fu`查看当前代码文件的所有函数  `,fU`跳转到指定函数中
+12.  `F8`添加so what 总结性声明.
+13. 编写perl文件常用命令，读取文件`\ii`,输出文件`\io`,while循环`\sw`,for循环`\sfe`, 另外你不能忘记的三个数据结构,标量`\id`,数组`\ia`,字典`\ih`
+14. Interesting,不妨试试! `,z`打开goyo界面，很好看
+15. 先设置一个mark`mA`,然后由于大写字母支持文件间跳转，于是`~A`也是可以跳转到先前的位置 很方便
+16. 修改了vimwiki配置到vim_runtime.
+17. 搞清楚[ vim-snipmate ][3]和[ vim-snippets ][2]的关系
 不断去学习[ vim-snippets ][2], [vim-snipmate设计理念][4]
+
+### important hierarchy file structure
+
+#### .vimrc, become very simple!
+
+```
+
+#!/bin/sh
+
+set runtimepath+=~/.vim
+
+source ~/.vim/yzl/cleanPlug.vim
+source ~/.vim/yzl/cleanWind.vim
+```
+
+####  cleanWind.vim, become very modular
+
+```
+
+
+let mapleader=","
+
+
+colorscheme srcery
+
+
+""""""""""""""""""""""""""""""""Startify"""""""""""""""""""""""
+source ~/.vim/yzl/config/config-startify.vim
+"""""""""""""""""""""""""""""""Textobj"""""""""""""""""""""""""""""""""
+source ~/.vim/yzl/config/config-textobj.vim
+
+""""""""""""""""""""""""""""""""""Easy motion""""""""""""""""""""""""""""""""""
+source ~/.vim/yzl/config/config-easymotion.vim
+
+""""""""""""""""""""""""""""" Goyo """""""""""""""""""""""""""""
+source ~/.vim/yzl/config/config-goyo.vim
+
+""""""""""""""""""""""""""""""""" Ctrlp """"""""""""""""""""""""""""""""
+"" ctrlp  ag  /"
+
+source ~/.vim/yzl/config/config-ctrlp.vim
+
+
+"""""""""""""""""""""""""""""""" Window  """"""""""""""""""""""""""""""""
+source ~/.vim/yzl/config/config-window.vim
+
+""""""""""""""""""""""""""""""""" TAG """""""""""""""""""""""""""""""""
+source ~/.vim/yzl/config/config-tab.vim
+
+"""""""""""""""""""""""""""""""""""""""""""""""
+source ~/.vim/yzl/config/config-rainbow-parenthese.vim
+"""""""""""""""""""""""""""""""""""""""""""""""
+""" for unite
+""""""""""""""""""""""""""" Unite """"""""""""""""""""
+source ~/.vim/yzl/config/config-unite.vim
+
+
+"""""""""""""""""""""""""" Vimwiki  """"""""""""""""""""""""""
+source ~/.vim/yzl/config/config-vimwiki.vim
+
+""""""""""""""""""""""""""  My self """""""""""""""""""""""
+source ~/.vim/yzl/config/config-myself.vim
+
+
+"""""""""""""""""""""""""" Basic setting """"""""""""""""""""""""""
+source ~/.vim/yzl/config/config-set.vim
+source ~/.vim/yzl/config/config-filetype.vim
+source ~/.vim/yzl/config/config-xdate.vim
+source ~/.vim/yzl/config/config-status.vim
+"""""""""""""""""""""""""""""""" Xdate """"""""""""""""""""""""""""""""""""
+
+set nocompatible
+filetype plugin on
+syntax on
+filetype indent on
+
+
+
+```
+
+#### Tmux
+
+Good window folding tools, try to learn and use it
+
+
+The best feature for tmux: [ write code and run code in the same panel ][5].
+Panel tag operation:
+
+`Ctrl+b %`  horizontal into two windows
+`Ctrl+b ""`  vertical into two windows
+`Ctrl+b <-`  left cursor into panel
+`Ctrl+b ->`  right cursor into panel
+`Ctrl+b ^`  up cursor into panel
+
+Window operation:
+`Ctrl+b s`
+
+`Ctrl+b c` new tmux session
+`Ctrl+b n` next session
+`Ctrl+b p` before session
+
+Exit tmux
+
+`Ctrl+b d` exit tmux
+
+[Tmux config files][6]
+
+```
+
+```
+
+#### FZF and FZF.vim
+
+fzf your things!
+
+good work ,fzf!
+
+insert mode, use `Ctrl-x Ctrl+f` to insert file path, use `Ctrl+x ctrl+j` to insert file name
+use `c-x c-k` to finish your word, use `C-x c-l` to finish one line.
+
+--------------------
 
 ![Vim-features][1]
 
@@ -363,3 +496,5 @@ Just do following:
 [2]:https://github.com/honza/vim-snippets 
 [3]:https://github.com/garbas/vim-snipmate 
 [4]:http://vim-wiki.mawercer.de/wiki/topic/text-snippets-skeletons-templates.html 
+[5]:https://www.cnblogs.com/maoxiaolv/p/5526602.html 
+[6]:https://blog.csdn.net/gatieme/article/details/49301037 

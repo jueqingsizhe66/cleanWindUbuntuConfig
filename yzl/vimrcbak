@@ -1,0 +1,6 @@
+#!/bin/sh
+
+set runtimepath+=~/.vim
+
+source ~/.vim/yzl/myPlugManage.vim
+let mapleader="<SPACE>"
