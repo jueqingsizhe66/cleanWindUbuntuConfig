@@ -23,8 +23,8 @@ nmap <leader>cd :CopyDirectoryPath<CR>
 
 
 "Toggle Menu and Toolbar
-map y "*y
-nmap y "*y
+"map y "*y
+"nmap y "*y
 
 
 
