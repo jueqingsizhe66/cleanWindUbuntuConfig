@@ -38,6 +38,7 @@ curl --insecure -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vi
 16. 修改了vimwiki配置到vim_runtime.
 17. 搞清楚[ vim-snipmate ][3]和[ vim-snippets ][2]的关系
 不断去学习[ vim-snippets ][2], [vim-snipmate设计理念][4]
+18. vim-mark `,m`对单词着色，`,n`取消单词着色,`,r`按照正则表达式着色
 
 ### important hierarchy file structure
 
