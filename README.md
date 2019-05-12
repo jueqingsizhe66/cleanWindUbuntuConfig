@@ -132,6 +132,7 @@ Panel tag operation:
 `Ctrl+b <-`  left cursor into panel
 `Ctrl+b ->`  right cursor into panel
 `Ctrl+b ^`  up cursor into panel
+`Ctrl+b o ` change to other panel
 
 Window operation:
 `Ctrl+b s`
@@ -227,6 +228,25 @@ use `c-x c-k` to finish your word, use `C-x c-l` to finish one line.
 --------------------
 
 ![Vim-features][1]
+
+#### Install RBF
+
+前提条件:
+``` java
+apt-get install python-tk
+pip3 install cython
+pip3 install sympy
+pip3 install rtree
+
+apt-get install libspatialindex-c5
+
+```
+
+安装步骤
+1. `git clone https://github.com/treverhines/RBF `
+2. `cd RBF; python3 setup.py install`
+
+测试与否无所谓，只要能运行RBF文件夹下README.md的三个程序即可。
 
 # The Ultimate vimrc
 
